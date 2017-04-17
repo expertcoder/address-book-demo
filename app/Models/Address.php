@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Address
  * @package App\Models
- * @version April 16, 2017, 11:15 pm UTC
+ * @version April 17, 2017, 7:29 pm UTC
  */
 class Address extends Model
 {
@@ -16,15 +16,18 @@ class Address extends Model
 
     public $table = 'addresses';
     
+    const CREATED_AT = 'created_at';
+    const UPDATED_AT = 'updated_at';
+
 
     protected $dates = ['deleted_at'];
 
 
     public $fillable = [
-        'street',
-        'town',
+        'country',
         'postcode',
-        'country'
+        'street',
+        'town'
     ];
 
     /**
@@ -33,10 +36,11 @@ class Address extends Model
      * @var array
      */
     protected $casts = [
-        'street' => 'string',
-        'town' => 'string',
+        'country' => 'string',
+        'id' => 'integer',
         'postcode' => 'string',
-        'country' => 'string'
+        'street' => 'string',
+        'town' => 'string'
     ];
 
     /**

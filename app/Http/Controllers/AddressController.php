@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AddressDataTable;
+use App\Http\Requests;
 use App\Http\Requests\CreateAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Repositories\AddressRepository;
-use App\Http\Controllers\AppBaseController;
-use Illuminate\Http\Request;
 use Flash;
-use Prettus\Repository\Criteria\RequestCriteria;
+use App\Http\Controllers\AppBaseController;
 use Response;
 
 class AddressController extends AppBaseController
@@ -24,16 +24,12 @@ class AddressController extends AppBaseController
     /**
      * Display a listing of the Address.
      *
-     * @param Request $request
+     * @param AddressDataTable $addressDataTable
      * @return Response
      */
-    public function index(Request $request)
+    public function index(AddressDataTable $addressDataTable)
     {
-        $this->addressRepository->pushCriteria(new RequestCriteria($request));
-        $addresses = $this->addressRepository->all();
-
-        return view('addresses.index')
-            ->with('addresses', $addresses);
+        return $addressDataTable->render('addresses.index');
     }
 
     /**

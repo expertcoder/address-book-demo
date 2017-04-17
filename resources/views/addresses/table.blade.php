@@ -1,28 +1,10 @@
-<table class="table table-responsive" id="addresses-table">
-    <thead>
-        <th>Street</th>
-        <th>Town</th>
-        <th>Postcode</th>
-        <th>Country</th>
-        <th colspan="3">Action</th>
-    </thead>
-    <tbody>
-    @foreach($addresses as $address)
-        <tr>
-            <td>{!! $address->street !!}</td>
-            <td>{!! $address->town !!}</td>
-            <td>{!! $address->postcode !!}</td>
-            <td>{!! $address->country !!}</td>
-            <td>
-                {!! Form::open(['route' => ['addresses.destroy', $address->id], 'method' => 'delete']) !!}
-                <div class='btn-group'>
-                    <a href="{!! route('addresses.show', [$address->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('addresses.edit', [$address->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
-                </div>
-                {!! Form::close() !!}
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+@section('css')
+    @include('layouts.datatables_css')
+@endsection
+
+{!! $dataTable->table(['width' => '100%']) !!}
+
+@section('scripts')
+    @include('layouts.datatables_js')
+    {!! $dataTable->scripts() !!}
+@endsection
