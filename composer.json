@@ -14,7 +14,8 @@
         "infyomlabs/swagger-generator": "dev-master",
         "doctrine/dbal": "~2.3",
         "yajra/laravel-datatables-oracle": "^7.2",
-        "yajra/laravel-datatables-buttons": "^1.0"
+        "yajra/laravel-datatables-buttons": "^1.0",
+        "cviebrock/laravel-elasticsearch": "^1.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
