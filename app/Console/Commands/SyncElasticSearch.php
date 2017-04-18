@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\ElasticsearchConnect\ElasticsearchConnect;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 
 class SyncElasticSearch extends Command
 {
@@ -19,7 +19,7 @@ class SyncElasticSearch extends Command
      *
      * @var string
      */
-    protected $description = 'Sync from Database to ElasticSearch';
+    protected $description = 'Reset and sync from Database to ElasticSearch';
 
     /**
      * Create a new command instance.
@@ -36,32 +36,23 @@ class SyncElasticSearch extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(ElasticsearchConnect $connect)
     {
+		//NOTE: this could be optmised by using the Bulk API
 
+		$this->info('Deleting entire index');
 
+		$connect->deleteDefaultIndex();
 
-
-    	$addresses = DB::table('addresses')->get();
+    	$addresses = \App\Models\Address::all();
 
 		foreach ($addresses as $address) {
 
-			$data = [
-				'body' => [
-					'street' => $address->street,
-					'postcode' => $address->postcode,
-				],
-				'index' => 'addresses',
-				'type' => 'address',
-				'id' => $address->id,
-			];
+			$this->info('Syncing address '. $address->id );
 
-			$r = \Elasticsearch::index($data);
+			$connect->index($address);
 
 		}
-
-
-
 
     }
 }

@@ -185,6 +185,7 @@ return [
 		Yajra\Datatables\DatatablesServiceProvider::class,
 		Yajra\Datatables\ButtonsServiceProvider::class,
 		Cviebrock\LaravelElasticsearch\ServiceProvider::class,
+		\App\ElasticsearchConnect\Providers\ElasticsearchConnectServiceProvider::class,
 	],
 
     /*

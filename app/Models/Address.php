@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\ElasticsearchConnect\ElasticsearchableInterface;
 use Eloquent as Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @package App\Models
  * @version April 17, 2017, 7:29 pm UTC
  */
-class Address extends Model
+class Address extends Model implements ElasticsearchableInterface
 {
     use SoftDeletes;
 
@@ -55,5 +56,27 @@ class Address extends Model
         'country' => 'required|max:80'
     ];
 
-    
+	public function getEsId()
+	{
+		return $this->id;
+	}
+
+	public function getEsData()
+	{
+		$data = [
+			'street' => $this->street,
+			'town' => $this->town,
+			'postcode' => $this->postcode,
+			'country' => $this->country,
+		];
+
+		return $data;
+	}
+
+	public function getEsType()
+	{
+		return 'address';
+	}
+
+
 }
