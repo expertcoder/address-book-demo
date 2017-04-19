@@ -60,14 +60,3 @@
       - name: backend
     ports:
       - "{{elasticsearch_port}}:9200"
-
-#NOTE - do I need to run this "rabbitmq-plugins enable rabbitmq_management" to enable the rabbitmq web interface
-- name: Rabbitmq
-  docker_container:
-    name: rabbitmq
-    state: started
-    image: rabbitmq:3.6.9
-    networks:
-      - name: backend
-    ports:
-      - "15672:15672"
