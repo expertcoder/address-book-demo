@@ -8,6 +8,10 @@ use Illuminate\Support\ServiceProvider;
 class ElasticsearchConnectServiceProvider extends ServiceProvider
 {
 
+	protected $subscribe = [
+		ElasticsearchableSubscriber::class,
+	];
+
 
 	/**
      * Bootstrap the application services.
