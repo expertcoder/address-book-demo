@@ -1,0 +1,12 @@
+- name: clone or pull git repo (application)
+  git:
+    repo: "{{ repo_application_source }}"
+    dest: "{{ repo_application_path }}"
+    executable: /usr/bin/git
+    accept_hostkey: true
+    force: yes
+    key_file: "{{git_deployment_key_dest_path}}"
+    version: "{{ repo_application_branch }}"
+  when: repo_enabled
+  tags:
+    - release-application

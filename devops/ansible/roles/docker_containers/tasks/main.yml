@@ -1,0 +1,73 @@
+- name: Create docker network
+  docker_network:
+    name: backend
+
+- name: Create PHP/Apache Container
+  docker_container:
+    name: lamp
+    state: started
+    image: expertcoder2017/lamp
+    volumes:
+      - "{{repo_application_path}}:/var/www"
+      - "{{laravel_env_file}}:/var/www/.env"
+    purge_networks: yes
+    networks:
+      - name: backend
+    ports:
+      - "80:80"
+
+- name: Create DB container
+  docker_container:
+    name: db
+    state: started
+    image: mysql:8
+    env:
+      MYSQL_ROOT_PASSWORD: "{{mysql_root_password}}"
+      MYSQL_DATABASE: "{{mysql_database}}"
+    volumes:
+      - "{{docker_mounts_directory}}/db/storage:/var/lib/mysql"
+      - "{{docker_mounts_directory}}/db/my.cnf:/root/.my.cnf"
+    purge_networks: yes
+    networks:
+      - name: backend
+    ports:
+      - "3306:3306"
+
+#WARNING this is unsafe for production environment
+- name: Create phpmyadmin container
+  docker_container:
+    name: phpmyadmin
+    state: started
+    image: phpmyadmin/phpmyadmin
+    env:
+      MYSQL_ROOT_PASSWORD: "{{mysql_root_password}}"
+      PMA_HOST: db  #db is referring to the name of the container
+    networks:
+      - name: backend
+    ports:
+      - "{{phpmyadmin_port}}:80"
+
+- name: Create ElasticSearch container
+  docker_container:
+    name: es
+    state: started
+    image: expertcoder2017/elasticsearch
+    #NOTE - volumes?
+#    volumes:
+#      - "{{docker_mounts_directory}}/es/data:/usr/share/elasticsearch/data"
+#      - "{{docker_mounts_directory}}/es/plugins:/usr/share/elasticsearch/plugins"
+    networks:
+      - name: backend
+    ports:
+      - "{{elasticsearch_port}}:9200"
+
+#NOTE - do I need to run this "rabbitmq-plugins enable rabbitmq_management" to enable the rabbitmq web interface
+- name: Rabbitmq
+  docker_container:
+    name: rabbitmq
+    state: started
+    image: rabbitmq:3.6.9
+    networks:
+      - name: backend
+    ports:
+      - "15672:15672"

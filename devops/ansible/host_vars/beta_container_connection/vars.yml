@@ -1,0 +1,7 @@
+ansible_connection: local
+#NOTE: in this case "ansible_connection: local" means connecting to the "local" docker client
+
+docker_client_environmental_variable:
+  DOCKER_TLS_VERIFY: '1'
+  DOCKER_HOST: 'tcp://46.101.224.24:2376'
+  DOCKER_CERT_PATH: '/Users/samanthony/.docker/machine/machines/address-book-demo'

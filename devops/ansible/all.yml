@@ -1,0 +1,46 @@
+
+
+#NOTE: Some of the default docker hosts, such as the boot2docker host dont have Python installed
+#Python is needed so most ansible commands can be ran against it. This role uses "raw" module which does
+#not require python, but you must set gather_facts = false
+- name: ensure python is installed on docker host
+  gather_facts: no
+  hosts: docker_hosts
+  user: root
+  roles:
+    - role: python2
+
+- name: db config files
+  hosts: docker_hosts
+  user: root
+  roles:
+    - role: db
+
+- name: Prepare some things for git to work the way we want
+  hosts: docker_hosts
+  user: root
+  roles:
+    - role: git_repo_prepare
+
+- name: Pull git repos
+  hosts: docker_hosts
+  user: root
+  roles:
+    - role: git_repo_pull
+
+
+- name: Setup some stuff of laravel
+  hosts: docker_hosts
+  user: root
+  roles:
+    - role: laravel
+
+- name: Create some docker containers
+  hosts: container_connections
+  environment: "{{docker_client_environmental_variable}}"
+  user: root
+  roles:
+    - role: docker_containers
+
+
+

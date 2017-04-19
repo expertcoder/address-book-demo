@@ -1,0 +1,8 @@
+- name: Create directory
+  file: path={{docker_mounts_directory}}/db state=directory
+
+- name: Create directory
+  file: path={{docker_mounts_directory}}/db/storage state=directory
+
+- name: setup my.cnf
+  template: src=my.cnf.j2 dest={{docker_mounts_directory}}/db/my.cnf

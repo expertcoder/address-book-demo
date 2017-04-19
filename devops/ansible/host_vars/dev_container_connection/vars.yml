@@ -1,0 +1,7 @@
+ansible_connection: local
+#NOTE: in this case "ansible_connection: local" means connecting to the "local" docker client
+
+docker_client_environmental_variable: ~ #Use local docker for mac
+
+
+

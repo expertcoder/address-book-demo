@@ -1,0 +1,5 @@
+- name: generate laravel .env file
+  template:
+    src: env.j2
+    dest: "{{laravel_env_file}}"
+    mode: 0755

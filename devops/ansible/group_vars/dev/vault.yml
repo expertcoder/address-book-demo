@@ -1,0 +1,2 @@
+#TODO - this file should be encrypted with ansible vault
+vault_mysql_root_password: mypassword

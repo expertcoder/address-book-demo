@@ -1,0 +1,3 @@
+#NOTE: typically this file would not be committed, only committed for purposes of this demo
+ds_git_deployment_key_src_path: /Users/samanthony/.ssh/ecom-bitbucket-deploy-key
+ds_dev_docker_mounts_directory: /work/address-book-demo/mounts

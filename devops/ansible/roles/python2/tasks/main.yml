@@ -1,0 +1,11 @@
+- name: Install Python 2.7 on destination machine (boot2docker)
+  raw: tce-load -wi python
+  when: inventory_hostname in groups['platform_boot2docker']
+
+- name: Install Python 2.7 on destination machine (digitalocean)
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+  when: inventory_hostname in groups['platform_digitalocean']
+
+
+
+

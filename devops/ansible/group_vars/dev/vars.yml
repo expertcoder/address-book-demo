@@ -1,0 +1,5 @@
+#docker_mounts_directory is overriding the value set in group_vars/all.yml
+docker_mounts_directory: "{{ds_dev_docker_mounts_directory}}"
+repo_application_branch: master
+
+repo_enabled: false

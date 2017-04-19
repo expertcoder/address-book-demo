@@ -1,0 +1,16 @@
+docker_mounts_directory: /home/docker/mounts
+mysql_database: mydbname
+
+#Both Github and Bitbucket allow for deployment or access keys.
+#git_deployment_key_src_path should be the path the the private deployment key on the machine running ansible (EG your computer)
+#git_deployment_key_dest_path is where the key file is copied to (No need to change this value)
+git_deployment_key_src_path: "{{ds_git_deployment_key_src_path}}"
+git_deployment_key_dest_path: ~/.ssh/git-provider-deployment
+repo_application_path: "{{docker_mounts_directory}}/lamp/varwww"
+repo_application_source: "{{ps_repo_application_source}}"
+
+#NOTE: vault_mysql_root_password is defined in dev, beta or prod folder, that is how the correct environments password is used.
+mysql_root_password: "{{vault_mysql_root_password}}"
+
+
+laravel_env_file: "{{docker_mounts_directory}}/lamp/laravel.env"
