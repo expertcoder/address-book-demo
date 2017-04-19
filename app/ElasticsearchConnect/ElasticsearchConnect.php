@@ -50,6 +50,10 @@ class ElasticsearchConnect
 
 	public function deleteDefaultIndex()
 	{
-		$this->client->indices()->delete(['index' => $this->getDefaultIndex() ]);
+		$params['index']  = $this->getDefaultIndex();
+
+		if ($this->client->indices()->exists($params) ) {
+			$this->client->indices()->delete($params);
+		}
 	}
 }

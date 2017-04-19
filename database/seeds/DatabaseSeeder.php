@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
 	{
 		$faker = Faker\Factory::create();
 
-		$limit = 10000;
+		$limit = 500;
 
 		for ($i = 0; $i < $limit; $i++) {
 

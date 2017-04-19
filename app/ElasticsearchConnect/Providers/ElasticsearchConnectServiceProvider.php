@@ -3,16 +3,12 @@
 namespace App\ElasticsearchConnect\Providers;
 
 use App\ElasticsearchConnect\ElasticsearchConnect;
+use App\ElasticsearchConnect\Listeners\ElasticsearchableSubscriber;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class ElasticsearchConnectServiceProvider extends ServiceProvider
 {
-
-	protected $subscribe = [
-		ElasticsearchableSubscriber::class,
-	];
-
-
 	/**
      * Bootstrap the application services.
      *
@@ -20,7 +16,7 @@ class ElasticsearchConnectServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+		Event::subscribe(ElasticsearchableSubscriber::class);
     }
 
     /**
