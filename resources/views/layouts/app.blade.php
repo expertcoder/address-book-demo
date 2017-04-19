@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>InfyOm Generator</title>
+    <title>Address Book</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -107,22 +107,22 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{!! url('/') !!}">
-                    InfyOm Generator
+                <a class="navbar-brand" href="{!! route('addresses.index') !!}">
+                    Address Book
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{!! url('/home') !!}">Home</a></li>
+                    <li><a href="{!! route('addresses.index') !!}">Addresses</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
-                    <li><a href="{!! url('/login') !!}">Login</a></li>
-                    <li><a href="{!! url('/register') !!}">Register</a></li>
+                    {{--<li><a href="{!! url('/login') !!}">Login</a></li>--}}
+                    {{--<li><a href="{!! url('/register') !!}">Register</a></li>--}}
                 </ul>
             </div>
         </div>
